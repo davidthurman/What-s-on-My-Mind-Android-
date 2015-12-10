@@ -5,4 +5,5 @@
     <string name="title">What\'s On My Mind?</string>
     <string name="take_photo">Take a Photo</string>
     <string name="choose_photo">Choose a Photo</string>
+    <string name="title_activity_polaroid">Polaroid</string>
 </resources>

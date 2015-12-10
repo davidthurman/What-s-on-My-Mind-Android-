@@ -16,6 +16,7 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -97,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
         fromPictures.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, 1);
+
+                startActivity(new Intent(MainActivity.this, Polaroid.class));
             }
         });
 
@@ -186,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     public void setupCamera(int width, int height)
     {

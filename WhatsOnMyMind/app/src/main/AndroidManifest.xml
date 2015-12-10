@@ -3,8 +3,10 @@
     package="com.develappme.academy.whatsonmymind" >
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera2.full" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,6 +28,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Polaroid"
+            android:label="@string/title_activity_polaroid"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 
