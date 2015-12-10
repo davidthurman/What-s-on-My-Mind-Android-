@@ -175,7 +175,7 @@ public class Polaroid extends AppCompatActivity implements SensorEventListener{
         System.out.println("NUMBER: 4");
         test = animate(textView, test);
         System.out.println("Success");
-        textView.setText(quotes.get(randomNumber));
+        textView.setText("\"" +quotes.get(randomNumber) + "\"");
 
         return;
     }
