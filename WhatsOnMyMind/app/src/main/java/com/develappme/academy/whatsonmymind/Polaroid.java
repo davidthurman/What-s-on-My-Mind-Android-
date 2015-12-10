@@ -3,6 +3,7 @@ package com.develappme.academy.whatsonmymind;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,10 +14,13 @@ import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -125,6 +129,34 @@ public class Polaroid extends AppCompatActivity implements SensorEventListener{
                 System.out.println("NUMBER: 3");
 
                 handleShakeEvent(count, randomNumber);
+            }
+        });
+
+
+        final Button saveBtn = (Button) findViewById(R.id.save);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveBtn.setVisibility(View.GONE);
+                System.out.println("Saving");
+                View content = findViewById(R.id.rlid);
+                content.setDrawingCacheEnabled(true);
+                Bitmap bitmap = content.getDrawingCache();
+                File file = new File("/sdcard/Pictures/" + "Polaroid" + ".png");
+                try {
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+                    FileOutputStream ostream = new FileOutputStream(file);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 10, ostream);
+                    ostream.close();
+                    content.invalidate();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    content.setDrawingCacheEnabled(false);
+                }
+
             }
         });
 
