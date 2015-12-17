@@ -46,7 +46,6 @@ public class Polaroid extends AppCompatActivity implements SensorEventListener{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, SELECT_PICTURE);
 
@@ -113,31 +112,36 @@ public class Polaroid extends AppCompatActivity implements SensorEventListener{
         accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         sm.registerListener(this,accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        System.out.print("NUMBER: 1");
         // ShakeDetector initialization
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager
                 .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mShakeDetector = new ShakeDetector();
-        System.out.println("NUMBER: 2");
         mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
 
             @Override
             public void onShake(int count) {
                 Random rand = new Random();
                 final int randomNumber = rand.nextInt(49); // 0-9.
-                System.out.println("NUMBER: 3");
 
                 handleShakeEvent(count, randomNumber);
             }
         });
 
+        final Button discardBtn = (Button) findViewById(R.id.discardButton);
+        discardBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                onBackPressed();
+            }
+        });
 
         final Button saveBtn = (Button) findViewById(R.id.save);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveBtn.setVisibility(View.GONE);
+                discardBtn.setVisibility(View.GONE);
                 System.out.println("Saving");
                 View content = findViewById(R.id.rlid);
                 content.setDrawingCacheEnabled(true);
@@ -160,23 +164,13 @@ public class Polaroid extends AppCompatActivity implements SensorEventListener{
             }
         });
 
-
-
-
-
-
-
     }
 
     private void handleShakeEvent(int count, int randomNumber) {
         Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-        // Vibrate for 500 milliseconds
         v.vibrate(500);
-        System.out.println("NUMBER: 4");
         test = animate(textView, test);
-        System.out.println("Success");
         textView.setText("\"" +quotes.get(randomNumber) + "\"");
-
         return;
     }
 
@@ -185,7 +179,6 @@ public class Polaroid extends AppCompatActivity implements SensorEventListener{
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
                 selectedImagePath = getPath(selectedImageUri);
-                //System.out.println("Image Path : " + selectedImagePath);
                 imageView.setImageURI(selectedImageUri);
             }
         }
@@ -209,14 +202,14 @@ public class Polaroid extends AppCompatActivity implements SensorEventListener{
 
             y = 2;
 
-            System.out.println("Testing 1");
+
 
         }
         else{
             x.animate().rotation(-360).setDuration(300);
 
             y = 1;
-            System.out.println("Testing 2");
+
         }
         return y;
 

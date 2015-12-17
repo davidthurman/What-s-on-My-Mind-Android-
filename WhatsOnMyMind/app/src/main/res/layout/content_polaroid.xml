@@ -53,6 +53,15 @@
         android:id="@+id/save"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="45dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Discard"
+        android:id="@+id/discardButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/save"
+        android:layout_below="@+id/imageView" />
 
 </RelativeLayout>
